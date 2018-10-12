@@ -1,0 +1,96 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color='dark'>
+        <ion-title>{{(profile?.name) ? profile?.name : profile?.login}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card color='dark' *ngIf='profile'>
+        <ion-item color='dark'>
+            <ion-avatar item-left>
+                <img src='{{profile.avatar}}'>
+            </ion-avatar>
+            <h2>{{profile.name}}</h2>
+            <p>@{{profile.login}}</p>
+        </ion-item>
+        <ion-card-content>
+            <p padding-top>{{(profile.bio ? profile.bio : '&nbsp;')}}</p>
+            <p padding-top>
+                <ion-note>
+                    <ion-icon name='briefcase' item-start *ngIf='profile.company'></ion-icon>
+                    {{profile.company}}
+                    <br *ngIf='profile.company' />
+                    <ion-icon name='map' item-start *ngIf='profile.location'></ion-icon>
+                    {{profile.location}}
+                    <br *ngIf='profile.location' />
+                    <ion-icon name='logo-rss' item-start *ngIf='profile.blog'></ion-icon>
+                    {{profile.blog}}
+                    <br *ngIf='profile.blog' />
+                    <ion-icon name='mail' item-start *ngIf='profile.email'></ion-icon>
+                    {{profile.email}}
+                </ion-note>
+            </p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small>
+                    <ion-icon name='people'></ion-icon>
+                    <div id='followers'>{{profile.followers}}</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-left clear small>
+                    <ion-icon name='eye'></ion-icon>
+                    <div id='following'>{{profile.following}}</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-left clear small>
+                    <ion-icon name='cube'></ion-icon>
+                    <div id='public_repos'>{{profile.public_repos}}</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <a href='{{profile.url}}' target='_blank'>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name='open'></ion-icon>
+                    </button>
+                </a>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-6 text-left padding>
+                <ion-note id='create_at'>
+                    <ion-icon name='document'></ion-icon>
+                    &nbsp;{{profile.create_at | date}}
+                </ion-note>
+            </ion-col>
+            <ion-col col-6 text-right padding>
+                <ion-note id='update_at'>
+                    <ion-icon name='refresh'></ion-icon>
+                    &nbsp;{{profile.update_at | date}}
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color='dark' text-center>
+        <ion-note padding-top padding-bottom>
+            <small>
+                @cerqueiranews 2018<br />
+                http://github.com/cerqueiranews
+            </small>
+        </ion-note>
+    </ion-toolbar>
+</ion-footer>

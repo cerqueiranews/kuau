@@ -1,0 +1,46 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color='dark'>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+    <ion-toolbar color='dark'>
+        <ion-searchbar [(ngModel)]='term' (ionInput)='onSearchInput($event)'>
+        </ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <p *ngIf='list.length == 0' text-center>
+        <em>Nenhum dado para ser exibido (re)faça sua busca.</em>
+        <ion-icon name='search'></ion-icon>
+    </p>
+    <ion-list>
+        <ion-item *ngFor='let item of list' (click)='openProfile(item.detail_url)'>
+            <ion-avatar item-left>
+                <img src='{{item.avatar_url}}'>
+            </ion-avatar>
+            <h2>{{item.login}}</h2>
+            <p>{{item.profile_url}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar color='dark' text-center>
+        <ion-note padding-top padding-bottom>
+            <small>
+                @cerqueiranews 2018<br />
+                http://github.com/cerqueiranews
+            </small>
+        </ion-note>
+    </ion-toolbar>
+</ion-footer>

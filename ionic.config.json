@@ -1,0 +1,7 @@
+{
+  "name": "kuau",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
