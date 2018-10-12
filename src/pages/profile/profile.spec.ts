@@ -51,13 +51,13 @@ describe('Profile Page', () => {
         fixture.destroy();
         component = null;
     });
-    it('should be created', (done) => {
+    it('should be created', () => {
         expect(component instanceof ProfilePage).toBe(true);
-        done();
+        
     });
-    it('should be created with param url is not null', (done) => {
+    it('should be created with param url is not null', () => {
         expect(component['url']).toBeTruthy();
-        done();
+        
     });
     it('should be fill profile after call getProfile', (done) => {
         component.getProfile().then(data => {

@@ -49,15 +49,15 @@ describe('Home Page', () => {
         fixture.destroy();
         component = null;
     });
-    it('should be created', (done) => {
+    it('should be created', () => {
         expect(component instanceof HomePage).toBe(true);
-        done();
+        
     });
-    it('title should be initialized with GitHub', (done) => {
+    it('title should be initialized with GitHub', () => {
         expect(component['title']).toEqual('GitHub');
-        done();
+        
     });
-    it('title should be initialized with GitHub and showed that way', (done) => {
+    it('title should be initialized with GitHub and showed that way', () => {
         let title = 'GitHub';
         fixture.detectChanges();
         de = fixture.debugElement.query(By.css('ion-title'));
@@ -65,9 +65,9 @@ describe('Home Page', () => {
 
         expect(component['title']).toEqual(title);
         expect(el.textContent).toContain(title);
-        done();
+        
     });
-    it('text should be showed if list is empty', (done) => {
+    it('text should be showed if list is empty', () => {
         let text = 'Nenhum dado para ser exibido (re)faça sua busca.';
         fixture.detectChanges();
         de = fixture.debugElement.query(By.css('em'));
@@ -76,10 +76,10 @@ describe('Home Page', () => {
         expect(component['list'].length).toEqual(0);
         expect(de).not.toBeNull();
         expect(el.textContent).toContain(text);
-        done();
+        
 
     });
-    it('text should be showed if list is empty after search', (done) => {
+    it('text should be showed if list is empty after search', () => {
         let text = 'Nenhum dado para ser exibido (re)faça sua busca.';
         component['term'] = '';
         expect(component.onSearchInput()).toBeTruthy();
@@ -90,7 +90,7 @@ describe('Home Page', () => {
         expect(component['list'].length).toEqual(0);
         expect(de).not.toBeNull();
         expect(el.textContent).toContain(text);
-        done();
+        
 
     });
     it('text should not be showed if list is not empty', (done) => {
@@ -156,7 +156,7 @@ describe('Home Page', () => {
             done();
         });
     });
-    it('push should be showed called after openProfile', (done) => {
+    it('push should be showed called after openProfile', () => {
         let navCtrl = fixture.debugElement.injector.get(NavController);
         spyOn(navCtrl, 'push');
 
@@ -164,7 +164,7 @@ describe('Home Page', () => {
         fixture.detectChanges();
 
         expect(navCtrl.push).toHaveBeenCalledWith('ProfilePage', { url: 'https://api.github.com/users/cerqueiranews' });
-        done();
+        
     });
     it('info user should be showed after search', (done) => {
         component['term'] = 'cerqueiranews';

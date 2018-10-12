@@ -17,7 +17,7 @@ import 'rxjs/add/observable/throw';
 export class GithubProvider {
 
     constructor(public http: HttpClient) {
-        console.log('Hello GithubProvider Provider');
+        
     }
 
     search(term: string) {

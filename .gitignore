@@ -33,5 +33,6 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+!docs/coverage/
 !docs/plugins/
 !docs/plugins/**/www/
