@@ -9,8 +9,8 @@
         "clean": "ionic-app-scripts clean",
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
-        "test-coverage": "karma start ./test-config/karma.conf.js --coverage --single-run",
-        "test": "karma start ./test-config/karma.conf.js --single-run"
+        "test-coverage": "karma start ./test-config/karma.conf.js --coverage",
+        "test": "karma start ./test-config/karma.conf.js"
     },
     "dependencies": {
         "@angular/animations": "5.2.11",

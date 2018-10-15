@@ -22,7 +22,7 @@ export class GithubProvider {
 
     search(term: string) {
 
-        let url: string = 'https://api.github.com/search/users?q=' + term;
+        let url: string = 'https://api.github.com/search/users?q=' + encodeURIComponent(term);
 
         return this.http.get(url, { observe: 'response', responseType: 'json' })
             .timeout(10000)

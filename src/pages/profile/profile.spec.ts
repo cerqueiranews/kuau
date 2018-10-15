@@ -23,7 +23,7 @@ describe('Profile Page', () => {
     let urlParam: string = 'https://api.github.com/users/cerqueiranews';
     let de: DebugElement;
     let el: HTMLElement;
-    beforeEach(() => {
+    beforeEach(async(() => {
         NavParamsMock.setParams(urlParam);
         TestBed.configureTestingModule({
             declarations: [MyApp],
@@ -41,8 +41,8 @@ describe('Profile Page', () => {
                 { provide: NavController, useClass: NavControllerMock },
                 GithubProvider
             ]
-        })
-    });
+        }).compileComponents();
+    }));
     beforeEach(() => {
         fixture = TestBed.createComponent(ProfilePage);
         component = fixture.componentInstance;
@@ -53,22 +53,19 @@ describe('Profile Page', () => {
     });
     it('should be created', () => {
         expect(component instanceof ProfilePage).toBe(true);
-        
     });
     it('should be created with param url is not null', () => {
-        expect(component['url']).toBeTruthy();
-        
+        expect(component['url']).not.toBeNull();
     });
-    it('should be fill profile after call getProfile', (done) => {
+    it('should be fill profile after call getProfile', async(() => {
         component.getProfile().then(data => {
             fixture.detectChanges();
             expect(component['profile']).not.toBeNull();
             expect(component['profile']).not.toBeUndefined();
             expect(component['profile']).toBeTruthy();
-            done();
         });
-    });
-    it('should be showed info profile after call getProfile', (done) => {
+    }));
+    it('should be showed info profile after call getProfile', async(() => {
         component.getProfile().then(data => {
             fixture.detectChanges();
 
@@ -133,8 +130,7 @@ describe('Profile Page', () => {
 
             expect(el.getAttribute('href')).toEqual(component['profile']['url']);
             expect(de).not.toBeNull();
-            done();
         });
-    },10000);
+    }),10000);
 
 });

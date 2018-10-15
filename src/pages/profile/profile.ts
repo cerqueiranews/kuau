@@ -33,7 +33,13 @@ export class ProfilePage {
         this.url = this.navParams.get('url');
 
         if (this.url != '' && this.url != null) {
-            this.getProfile();
+            this.getProfile().then(data => {
+                if(data){
+                    console.log('Profile encontrado!'); 
+                }else{
+                    console.error('Erro ao buscar o profile!'); 
+                }
+            });
         } else {
             console.error('URL não encontrada!');
             this.navCtrl.setRoot('HomePage');
@@ -73,8 +79,8 @@ export class ProfilePage {
                         this.storage.set(this.url, this.profile);
                         resolve(true);
                     }, error => {
-                        console.log(error);
                         this.profile = <User>{};
+                        console.log(error);
                         resolve(false);
                     });
                 }

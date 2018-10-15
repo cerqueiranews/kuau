@@ -80,7 +80,14 @@ var ProfilePage = /** @class */ (function () {
         });
         this.url = this.navParams.get('url');
         if (this.url != '' && this.url != null) {
-            this.getProfile();
+            this.getProfile().then(function (data) {
+                if (data) {
+                    console.log('Profile encontrado!');
+                }
+                else {
+                    console.error('Erro ao buscar o profile!');
+                }
+            });
         }
         else {
             console.error('URL não encontrada!');
@@ -121,8 +128,8 @@ var ProfilePage = /** @class */ (function () {
                         _this.storage.set(_this.url, _this.profile);
                         resolve(true);
                     }, function (error) {
-                        console.log(error);
                         _this.profile = {};
+                        console.log(error);
                         resolve(false);
                     });
                 }

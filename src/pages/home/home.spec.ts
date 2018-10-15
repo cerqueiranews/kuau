@@ -22,7 +22,7 @@ describe('Home Page', () => {
     let component;
     let de: DebugElement;
     let el: HTMLElement;
-    beforeEach(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [MyApp],
             schemas: [NO_ERRORS_SCHEMA],
@@ -39,8 +39,8 @@ describe('Home Page', () => {
                 { provide: NavController, useClass: NavControllerMock },
                 GithubProvider
             ]
-        });
-    });
+        }).compileComponents();
+    }));
     beforeEach(() => {
         fixture = TestBed.createComponent(HomePage);
         component = fixture.componentInstance;
@@ -50,12 +50,10 @@ describe('Home Page', () => {
         component = null;
     });
     it('should be created', () => {
-        expect(component instanceof HomePage).toBe(true);
-        
+        expect(component instanceof HomePage).toBe(true);        
     });
     it('title should be initialized with GitHub', () => {
-        expect(component['title']).toEqual('GitHub');
-        
+        expect(component['title']).toEqual('GitHub');        
     });
     it('title should be initialized with GitHub and showed that way', () => {
         let title = 'GitHub';
@@ -76,8 +74,6 @@ describe('Home Page', () => {
         expect(component['list'].length).toEqual(0);
         expect(de).not.toBeNull();
         expect(el.textContent).toContain(text);
-        
-
     });
     it('text should be showed if list is empty after search', () => {
         let text = 'Nenhum dado para ser exibido (re)faça sua busca.';
@@ -90,10 +86,8 @@ describe('Home Page', () => {
         expect(component['list'].length).toEqual(0);
         expect(de).not.toBeNull();
         expect(el.textContent).toContain(text);
-        
-
     });
-    it('text should not be showed if list is not empty', (done) => {
+    it('text should not be showed if list is not empty', async(() => {
         component['term'] = 'cerqueiranews';
         component.onSearchInput().then(data => {
             fixture.detectChanges();
@@ -101,11 +95,10 @@ describe('Home Page', () => {
 
             expect(component['list'].length).toBeGreaterThan(0);
             expect(de).toBeNull();
-            done();
         });
 
-    });
-    it('list should be clean if term is empty', (done) => {
+    }));
+    it('list should be clean if term is empty', async(() => {
         component['term'] = 'cerqueiranews';
         component.onSearchInput().then(data => {
             fixture.detectChanges();
@@ -124,10 +117,9 @@ describe('Home Page', () => {
             expect(component['list'].length).toEqual(0);
             expect(de).not.toBeNull();
             expect(el.textContent).toContain(text);
-            done();
         });
-    });
-    it('after search should be showed a list if list is not empty', (done) => {
+    }));
+    it('after search should be showed a list if list is not empty', async(() => {
         component['term'] = 'cerqueiranews';
         component.onSearchInput().then(data => {
             fixture.detectChanges();
@@ -135,10 +127,9 @@ describe('Home Page', () => {
 
             expect(component['list'].length).toBeGreaterThan(0);
             expect(de).toBeNull();
-            done();
         });
-    });
-    it('after click on item should be showed a page profile', (done) => {
+    }));
+    it('after click on item should be showed a page profile', async(() => {
         component['term'] = 'cerqueiranews';
         component.onSearchInput().then(data => {
             fixture.detectChanges();
@@ -146,16 +137,13 @@ describe('Home Page', () => {
 
             de = fixture.debugElement.query(By.css('ion-list ion-item'));
             de.triggerEventHandler('click', null);
-            //el = fixture.nativeElement.querySelector('ion-list ion-item');
-            //el.click();
             fixture.detectChanges();
 
             expect(component['list'].length).toBeGreaterThan(0);
             expect(de).not.toBeNull();
             expect(component.openProfile).toHaveBeenCalledWith(component['list'][0]['detail_url']);
-            done();
         });
-    });
+    }));
     it('push should be showed called after openProfile', () => {
         let navCtrl = fixture.debugElement.injector.get(NavController);
         spyOn(navCtrl, 'push');
@@ -166,7 +154,7 @@ describe('Home Page', () => {
         expect(navCtrl.push).toHaveBeenCalledWith('ProfilePage', { url: 'https://api.github.com/users/cerqueiranews' });
         
     });
-    it('info user should be showed after search', (done) => {
+    it('info user should be showed after search', async(() => {
         component['term'] = 'cerqueiranews';
         component.onSearchInput().then(data => {
             fixture.detectChanges();
@@ -181,8 +169,7 @@ describe('Home Page', () => {
             el = de.nativeElement;
             expect(el.getAttribute('src')).toEqual(component['list'][0]['avatar_url']);
             expect(de).not.toBeNull();
-            done();
         });
-    });
+    }));
 
 });

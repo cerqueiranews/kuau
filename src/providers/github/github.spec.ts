@@ -19,7 +19,7 @@ describe('Github Provider', () => {
     let el: HTMLElement;
     let term: string = 'cerqueiranews';
     let url: string = 'https://api.github.com/users/cerqueiranews';
-    beforeEach(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [],
             schemas: [NO_ERRORS_SCHEMA],
@@ -30,8 +30,8 @@ describe('Github Provider', () => {
                 GithubProvider,
                 HttpClient
             ]
-        })
-    });
+        }).compileComponents();
+    }));
     beforeEach(() => {
 
     });
@@ -41,25 +41,19 @@ describe('Github Provider', () => {
     it('should be created', inject([GithubProvider], (githubPrvd) => {
         expect(githubPrvd instanceof GithubProvider).toBe(true);
     }));
-    it('should be returned list searched', inject([GithubProvider], (githubPrvd, done) => {
+    it('should be returned list searched', async(inject([GithubProvider], (githubPrvd) => {
         githubPrvd.search(term).subscribe(data => {
             expect(data).toBeTruthy();
             expect(Array.isArray(data.items)).toBeTruthy();
             expect(data.total_count).toBeGreaterThanOrEqual(1);
             expect(data.items.length).toBeGreaterThanOrEqual(1);
             expect(data.total_count == data.items.length);
-            done();
-        }, error => {
-            done();
         });
-    }));
-    it('should be returned info resource requested', inject([GithubProvider], (githubPrvd, done) => {
+    })));
+    it('should be returned info resource requested', async(inject([GithubProvider], (githubPrvd) => {
         githubPrvd.getUrl(url).subscribe(data => {
             expect(data).toBeTruthy();
-            done();
-        }, error => {
-            done();
         });
-    }));
+    })));
 
 });

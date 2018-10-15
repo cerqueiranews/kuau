@@ -91,10 +91,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var GithubProvider = /** @class */ (function () {
     function GithubProvider(http) {
         this.http = http;
-        console.log('Hello GithubProvider Provider');
     }
     GithubProvider.prototype.search = function (term) {
-        var url = 'https://api.github.com/search/users?q=' + term;
+        var url = 'https://api.github.com/search/users?q=' + encodeURIComponent(term);
         return this.http.get(url, { observe: 'response', responseType: 'json' })
             .timeout(10000)
             .retry(3)

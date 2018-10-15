@@ -14,7 +14,7 @@ module.exports = function (config) {
             require('@angular-devkit/build-angular/plugins/karma')
         ],
         files: [
-            { pattern: './karma-test-shim.js', watched: true }
+            { pattern: './karma-test-shim.js', watched: false }
         ],
         preprocessors: {
             './karma-test-shim.js': ['webpack'
@@ -55,9 +55,23 @@ module.exports = function (config) {
         port: 9876,
         colors: true,
         logLevel: config.LOG_ERROR,
-        autoWatch: true,
-        browsers: ['Chrome'],
-        singleRun: false
+        autoWatch: false,
+        customLaunchers: {
+            ChromeHeadless: {
+                base: 'Chrome',
+                flags: [
+                    '--headless',
+                    '--disable-gpu',
+                    '--no-sandbox',
+                    '--remote-debugging-port=9222',
+                ]
+            }
+        },
+        browsers: [
+            'ChromeHeadless'
+            //'Chrome'
+        ],
+        singleRun: true
     };
     config.set(_config);
 };
